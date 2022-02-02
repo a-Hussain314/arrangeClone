@@ -1,0 +1,77 @@
+{
+  "_from": "react-native-autoheight-webview@1.0.1",
+  "_id": "react-native-autoheight-webview@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-PkKykRmmf+P0a4TXz726FgB9JwJ+RrmCiHgStzIOxo5iizeriaLsEdNqGkJptRxjvCBftfeJ8geg+FfSRFECdA==",
+  "_location": "/react-native-autoheight-webview",
+  "_phantomChildren": {
+    "loose-envify": "1.4.0",
+    "object-assign": "4.1.1"
+  },
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-autoheight-webview@1.0.1",
+    "name": "react-native-autoheight-webview",
+    "escapedName": "react-native-autoheight-webview",
+    "rawSpec": "1.0.1",
+    "saveSpec": null,
+    "fetchSpec": "1.0.1"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-autoheight-webview/-/react-native-autoheight-webview-1.0.1.tgz",
+  "_shasum": "6e9d3672ec442caaf9be62bd94f87343452d5808",
+  "_spec": "react-native-autoheight-webview@1.0.1",
+  "_where": "/Users/macmini11/Documents/ClassicalNet/classical-net 2",
+  "author": {
+    "name": "iou90"
+  },
+  "bugs": {
+    "url": "https://github.com/iou90/react-native-autoheight-webview/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "immutable": "^3.8.2",
+    "prop-types": "^15.7.2"
+  },
+  "deprecated": false,
+  "description": "An auto height webview for React Native, even auto width for inline html",
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "eslint": "^4.18.1",
+    "eslint-plugin-jsx": "^0.0.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-native": "^3.6.0"
+  },
+  "files": [
+    "index.js",
+    "autoHeightWebView"
+  ],
+  "homepage": "https://github.com/iou90/react-native-autoheight-webview#readme",
+  "keywords": [
+    "react",
+    "react-native",
+    "autoheight",
+    "webview"
+  ],
+  "license": "ISC",
+  "main": "autoHeightWebView",
+  "name": "react-native-autoheight-webview",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">= 0.57.0",
+    "react-native-webview": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iou90/react-native-autoheight-webview.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.1"
+}
