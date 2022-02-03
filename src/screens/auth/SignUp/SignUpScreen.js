@@ -62,12 +62,12 @@ export default class Login extends Component {
   signupButtonPressed = () => {
     var user_email = this.state.email;
     var user_password = this.state.password;
-
+    var phoneNumber = this.state.phone;
     //***** For validate input field */
     const nameError = validate('name', this.state.name);
     const surnameError = validate('surname', this.state.surname);
     const phoneError = validate('phone', this.state.phone);
-    const emailError = validate('email', this.state.email);
+    // const emailError = validate('email', this.state.email);
     const passwordError = validate('login_password', this.state.password);
     const check2Error = validate('check2', this.state.checked2);
     const confirmPasswordError = validate(
@@ -80,7 +80,7 @@ export default class Login extends Component {
       phoneError: phoneError,
       nameError: nameError,
       surnameError: surnameError,
-      emailError: emailError,
+      // emailError: emailError,
       passwordError: passwordError,
       confirmPasswordError: confirmPasswordError,
       check2Error: check2Error,
@@ -91,7 +91,7 @@ export default class Login extends Component {
       nameError ||
       surnameError ||
       phoneError ||
-      emailError ||
+      // emailError ||
       passwordError ||
       check2Error
     ) {
@@ -113,12 +113,14 @@ export default class Login extends Component {
       body.append('phoneno', this.state.phone);
       body.append('country_code', this.state.langVal);
       body.append('device_token', this.state.token);
+      body.append('phoneVerify', true);
+
       //body.append('device_token', 'f84BRVpsDkW3gsDjP4u1Si:APA91bFRAmWKWURE_ShpVf7Rbp0…yF7EBUMQS_5HDUd-gNJQrmEoaWlqAIt-x8xH_KtjnVTymQS2U')
       console.log('body =>', body);
       // ***** api calling * /
-      postService('register', body)
+      postService('user/register', body)
         .then((res) => {
-          console.log('register ===>', res);
+          console.log('register ====>', res);
 
           if (res.data.status === 1) {
             this.setState({
@@ -130,6 +132,7 @@ export default class Login extends Component {
                 screenName: 'register',
                 email: user_email,
                 password: user_password,
+                phoneNumber
               });
             }, 100);
 
@@ -158,6 +161,7 @@ export default class Login extends Component {
           }
         })
         .catch((error) => {
+          console.log("🚀 ~ file: SignUpScreen.js ~ line 161 ~ Login ~ error", {...error})
           this.setState({
             loading: false,
           });

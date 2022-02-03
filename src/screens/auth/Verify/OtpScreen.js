@@ -82,7 +82,7 @@ export default function OtpScreen({ route, navigation }) {
       setLoading(true);
 
       const postData = {
-        email: route.params.email,
+        phoneNumber : route.params.phoneNumber,
         otp: otp,
         type: route.params.screenName == 'forgot' ? 'forgot' : 'login',
         device_token: token,
@@ -90,7 +90,7 @@ export default function OtpScreen({ route, navigation }) {
       };
       console.log("postData otp", postData);
       //***** api calling */
-      postService('verifyotp', postData)
+      postService('user/verifyotp', postData)
         .then(async res => {
           // console.log("res", res);
           setLoading(false);
@@ -219,7 +219,7 @@ export default function OtpScreen({ route, navigation }) {
               {I18n.t('lbl_otp_subtitle')}
             </Text>
             <View style={{ flexDirection: 'row', }}>
-              <Text style={{ ...CommonStyles.WhiteTitleTextStyle(12) }}>{I18n.t('lbl_email') + ' : '}</Text>
+              <Text style={{ ...CommonStyles.WhiteTitleTextStyle(12) }}>{I18n.t('lbl_phone_number') + ' : '}</Text>
               <Text
                 style={{
                   ...CommonStyles.WhiteTitleTextStyle(12),
@@ -228,7 +228,7 @@ export default function OtpScreen({ route, navigation }) {
                   paddingRight: 10,
                   textDecorationLine: 'underline'
                 }}>
-                {route.params.email}
+                {route.params.phoneNumber}
               </Text>
             </View>
           </View>

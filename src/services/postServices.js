@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 //***** common url for calling webservices */
 // const URL = 'https://35.208.113.133:17345/webservice/user/'; // arrangeApp
 //const URL = 'http://oppa.devtechnosys.tech/public/api/'; // oppa
-const URL = "https://arrange-api.herokuapp.com/"
+const URL = "https://arrange-api.herokuapp.com/webservice/"
 //***** common function for post services */
 export const postService = async (urlAction, params) => {
   let ServiceUrl = URL + urlAction;
@@ -27,6 +27,7 @@ export const postService = async (urlAction, params) => {
     Authorization: `Bearer ${token}`,
   };
   //console.log("ServiceUrl ==>", headers);
+  console.log("🚀 ~ file: postServices.js ~ line 38 ~ ServiceUrl", ServiceUrl)
   return new Promise(function (resolve, reject) {
     axios({
       method: 'post',
