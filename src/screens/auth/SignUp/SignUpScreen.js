@@ -118,7 +118,7 @@ export default class Login extends Component {
       //body.append('device_token', 'f84BRVpsDkW3gsDjP4u1Si:APA91bFRAmWKWURE_ShpVf7Rbp0…yF7EBUMQS_5HDUd-gNJQrmEoaWlqAIt-x8xH_KtjnVTymQS2U')
       console.log('body =>', body);
       // ***** api calling * /
-      postService('user/register', body)
+      postService('register', body)
         .then((res) => {
           console.log('register ====>', res);
 

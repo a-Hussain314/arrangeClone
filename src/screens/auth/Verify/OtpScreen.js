@@ -90,7 +90,7 @@ export default function OtpScreen({ route, navigation }) {
       };
       console.log("postData otp", postData);
       //***** api calling */
-      postService('user/verifyotp', postData)
+      postService('verifyotp', postData)
         .then(async res => {
           // console.log("res", res);
           setLoading(false);

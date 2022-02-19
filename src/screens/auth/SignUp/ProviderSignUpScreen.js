@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   View,
   Text,
@@ -10,25 +10,25 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
-import { globalImagePath } from '../../../constants/globalImagePath';
-import { Container, Content } from 'native-base';
+import {globalImagePath} from '../../../constants/globalImagePath';
+import {Container, Content} from 'native-base';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
-import { CommonStyles } from '../../../assets/css';
+import {CommonStyles} from '../../../assets/css';
 import validate from '../../../components/Validations/validate_wrapper';
 import * as Animatable from 'react-native-animatable';
-import { showToast, showDangerToast } from '../../../components/ToastMessage';
-import { fonts, metrics, colors } from '../../../Theme';
-import { postService } from '../../../services/postServices';
-import { RadioButton } from '../../../components/index';
+import {showToast, showDangerToast} from '../../../components/ToastMessage';
+import {fonts, metrics, colors} from '../../../Theme';
+import {postService} from '../../../services/postServices';
+import {RadioButton} from '../../../components/index';
 import Loader from '../../../components/Loader';
 import I18n from '../../../I18n';
 import GoogleSearchInput from '../../../components/googleSearchPlaceModal';
 import DocumentPicker from 'react-native-document-picker';
 import ImagePicker from 'react-native-image-picker';
 import ErrorMessage from '../../../components/ErrorMessage';
-import { normalize } from '../../../components/Dimensions';
-import { Checkbox, Lable } from '../../../components';
+import {normalize} from '../../../components/Dimensions';
+import {Checkbox, Lable} from '../../../components';
 import Geolocation from '@react-native-community/geolocation';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -40,7 +40,7 @@ import {
 import font from '../../../Theme/font';
 const height = metrics.screenHeight;
 const width = metrics.screenWidth;
-var isDissbled = false
+var isDissbled = false;
 export default class ProviderSignUpScreen extends Component {
   constructor(props) {
     super(props);
@@ -76,20 +76,18 @@ export default class ProviderSignUpScreen extends Component {
       currentLat: '',
       currentLong: '',
       token: '',
-      check2Error: "",
+      check2Error: '',
       isAddressUpdate: false,
       checked2: false,
     };
   }
 
   componentDidMount() {
-
     this.subscribe = this.props.navigation.addListener('focus', () => {
       this.selectLocation();
 
       Geolocation.getCurrentPosition(
         (position) => {
-
           this.setState({
             currentLat: position.coords.latitude,
             currentLong: position.coords.longitude,
@@ -99,12 +97,11 @@ export default class ProviderSignUpScreen extends Component {
         //{ enableHighAccuracy: true, timeout: 20000, maximumAge: 10000 },
       );
     });
-    AsyncStorage.getItem("fcmToken", async (err1, fcmToken) => {
+    AsyncStorage.getItem('fcmToken', async (err1, fcmToken) => {
       let fcm_token = fcmToken;
       if (fcm_token) {
-        this.setState({ token: fcm_token });
+        this.setState({token: fcm_token});
       }
-
     });
   }
 
@@ -118,9 +115,9 @@ export default class ProviderSignUpScreen extends Component {
     const phoneError = validate('phone', this.state.phone);
     const emailError = validate('email', this.state.email);
     const passwordError = validate('password', this.state.password);
-    const check2Error = validate("check2", this.state.checked2);
-    const docFileError =
-      this.state.docArray.length == 0 ? I18n.t('err_document') : '';
+    const check2Error = validate('check2', this.state.checked2);
+    // const docFileError =
+    //   this.state.docArray.length == 0 ? I18n.t('err_document') : '';
     const placeName_errr =
       this.state.placeName == '' ? I18n.t('err_select_location') : '';
     const confirmPasswordError = validate(
@@ -136,10 +133,10 @@ export default class ProviderSignUpScreen extends Component {
       salonNameError: salonNameError,
       emailError: emailError,
       passwordError: passwordError,
-      docFileError: docFileError,
+      // docFileError: docFileError,
       confirmPasswordError: confirmPasswordError,
       placeNameError: placeName_errr,
-      check2Error: check2Error
+      check2Error: check2Error,
     });
 
     if (
@@ -150,7 +147,7 @@ export default class ProviderSignUpScreen extends Component {
       passwordError ||
       descriptionError ||
       placeName_errr ||
-      docFileError ||
+      // docFileError ||
       check2Error
     ) {
       // this.signupBtn.shake();
@@ -160,7 +157,7 @@ export default class ProviderSignUpScreen extends Component {
         return;
       }
       if (isDissbled) {
-        return
+        return;
       }
       isDissbled = true;
       this.setState({
@@ -182,16 +179,16 @@ export default class ProviderSignUpScreen extends Component {
       body.append('email', this.state.email.toLowerCase());
       body.append('description', this.state.description);
       // body.append('pdf', this.state.docUri);
-      if (this.state.docArray.length != 0) {
-        this.state.docArray.forEach((item, i) => {
+      // if (this.state.docArray.length != 0) {
+      //   this.state.docArray.forEach((item, i) => {
 
-          body.append('pdf', {
-            uri: item.uri,
-            type: item.type,
-            name: 'pdf' + i + '.pdf',
-          });
-        });
-      }
+      //     body.append('pdf', {
+      //       uri: item.uri,
+      //       type: item.type,
+      //       name: 'pdf' + i + '.pdf',
+      //     });
+      //   });
+      // }
       // e
       body.append('salon_name', this.state.salonName);
       body.append('servicetype', this.state.serviceType);
@@ -208,7 +205,13 @@ export default class ProviderSignUpScreen extends Component {
 
       postService('register', body)
         .then((res) => {
-          // console.log('register ==>', res);
+          // Object.keys(res).forEach((key) => {
+          //   console.log(
+          //     '🚀 ~ file: ProviderSignUpScreen.js ~ ProviderSignUpScreen ~ res.keys ~',
+          //     key,
+          //     res[key],
+          //   );
+          // });
 
           if (res.data.status === 1) {
             this.setState({
@@ -220,6 +223,7 @@ export default class ProviderSignUpScreen extends Component {
                 screenName: 'register',
                 email: user_email,
                 password: user_password,
+                phoneNumber : this.state.phone
               });
             }, 100);
 
@@ -261,7 +265,9 @@ export default class ProviderSignUpScreen extends Component {
           }, 100);
         });
     }
-    setTimeout(() => { isDissbled = false; }, 2000)
+    setTimeout(() => {
+      isDissbled = false;
+    }, 2000);
   };
   onSelectLanguage = (lang, index) => {
     this.setState({
@@ -270,7 +276,7 @@ export default class ProviderSignUpScreen extends Component {
   };
 
   check = (f) => {
-    this.setState({ serviceType: f });
+    this.setState({serviceType: f});
   };
 
   getDocument = async () => {
@@ -280,8 +286,7 @@ export default class ProviderSignUpScreen extends Component {
         type: [DocumentPicker.types.pdf, DocumentPicker.types.plainText],
       });
       // console.log('res =>', res);
-      this.setState({ docArray: res, docFileError: '' });
-
+      this.setState({docArray: res, docFileError: ''});
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on
@@ -293,15 +298,15 @@ export default class ProviderSignUpScreen extends Component {
 
   confirmAlert = () => {
     Alert.alert(
-      `${I18n.t("lbl_image_permisson")}`,
-      `${I18n.t("lbl_need_upload_photo")}`,
+      `${I18n.t('lbl_image_permisson')}`,
+      `${I18n.t('lbl_need_upload_photo')}`,
       [
         {
-          text: `${I18n.t("lbl_not_allow")}`,
+          text: `${I18n.t('lbl_not_allow')}`,
           onPress: () => console.log('Permission denied'),
           style: 'cancel',
         },
-        { text: `${I18n.t("lbl_open_setting")}`, onPress: () => openSettings() },
+        {text: `${I18n.t('lbl_open_setting')}`, onPress: () => openSettings()},
       ],
     );
   };
@@ -312,7 +317,7 @@ export default class ProviderSignUpScreen extends Component {
         check(PERMISSIONS.IOS.CAMERA),
         check(PERMISSIONS.IOS.PHOTO_LIBRARY),
       ]).then(([cameraStatus, photosStatus]) => {
-        console.log({ cameraStatus, photosStatus });
+        console.log({cameraStatus, photosStatus});
         if (cameraStatus == 'blocked' || photosStatus == 'blocked') {
           this.confirmAlert();
         } else {
@@ -324,7 +329,7 @@ export default class ProviderSignUpScreen extends Component {
         check(PERMISSIONS.ANDROID.CAMERA),
         check(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE),
       ]).then(([cameraStatus, photosStatus]) => {
-        console.log({ cameraStatus, photosStatus });
+        console.log({cameraStatus, photosStatus});
         if (cameraStatus == 'blocked' || photosStatus == 'blocked') {
           this.confirmAlert();
         } else {
@@ -337,13 +342,13 @@ export default class ProviderSignUpScreen extends Component {
   //***** Function for uploading images */
   pickImageHandler = () => {
     ImagePicker.showImagePicker(
-      { title: I18n.t('lbl_pick_image'), maxWidth: 800, maxHeight: 600 },
+      {title: I18n.t('lbl_pick_image'), maxWidth: 800, maxHeight: 600},
       (res) => {
         if (res.didCancel) {
         } else if (res.error) {
         } else {
           //  console.log('response.uri =>', res.uri);
-          this.setState({ setImage: res.uri });
+          this.setState({setImage: res.uri});
           //setImage(res.uri);
           //   setIsImageUpdate(true);
           //   setImageError(validate('image', res.uri));
@@ -368,27 +373,27 @@ export default class ProviderSignUpScreen extends Component {
     if (index > -1) {
       this.state.docArray.splice(index, 1);
     }
-    this.setState({ docArray: this.state.docArray });
+    this.setState({docArray: this.state.docArray});
   };
 
   renderDocList = (item, index) => {
     return (
-      <View style={{ flexDirection: 'row', marginBottom: 5, paddingVertical: 5 }}>
-        <View style={{ flex: 1 }}>
+      <View style={{flexDirection: 'row', marginBottom: 5, paddingVertical: 5}}>
+        <View style={{flex: 1}}>
           <Text>{item.name}</Text>
         </View>
         <TouchableOpacity
           onPress={() => {
             this.deleteDoc(item, index);
           }}
-          style={{ padding: 5, right: 5 }}>
+          style={{padding: 5, right: 5}}>
           <Image source={globalImagePath.crossImage} />
         </TouchableOpacity>
       </View>
     );
   };
 
-  setDefaultValue = (data) => { };
+  setDefaultValue = (data) => {};
 
   showMapView = () => {
     this.setState(
@@ -444,38 +449,41 @@ export default class ProviderSignUpScreen extends Component {
   };
 
   check2 = () => {
-    this.setState({ checked2: !this.state.checked2, check2Error: validate("check2", !this.state.checked2) });
+    this.setState({
+      checked2: !this.state.checked2,
+      check2Error: validate('check2', !this.state.checked2),
+    });
   };
 
   render() {
     return (
-      <Container style={{ flex: 1, backgroundColor: colors.darkShade }}>
+      <Container style={{flex: 1, backgroundColor: colors.darkShade}}>
         <GoogleSearchInput
           visible={this.state.searchModal}
           _placeValue={(value, lat, lng) =>
             this._getPlaceValue(value, lat, lng)
           }
           _goBack={() => {
-            this.setState({ searchModal: false });
+            this.setState({searchModal: false});
           }}
         />
         <Loader loading={this.state.loading} />
         <ScrollView
-          style={{ flex: 1 }}
+          style={{flex: 1}}
           showsVerticalScrollIndicator={false}
           bounces={false}
           keyboardShouldPersistTaps={'handled'}>
           <ImageBackground
             source={globalImagePath.signUp}
-            style={{ backgroundColor: colors.darkShade, width: '100%' }}>
+            style={{backgroundColor: colors.darkShade, width: '100%'}}>
             <View
               style={{
                 flex: 1,
                 backgroundColor: 'rgba(0,0,0,0.3)',
                 width: '100%',
               }}>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={{ flexDirection: 'row' }}>
+              <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row'}}>
                   <TouchableOpacity
                     style={{
                       paddingLeft: 20,
@@ -486,12 +494,12 @@ export default class ProviderSignUpScreen extends Component {
                     <Image
                       source={globalImagePath.back_icon}
                       resizeMode="cover"
-                      style={{ tintColor: '#fff' }}
+                      style={{tintColor: '#fff'}}
                     />
                   </TouchableOpacity>
                 </View>
               </View>
-              <View style={{ paddingHorizontal: 30, alignItems: 'center' }}>
+              <View style={{paddingHorizontal: 30, alignItems: 'center'}}>
                 <Animatable.View animation="slideInDown">
                   <View
                     style={{
@@ -505,7 +513,7 @@ export default class ProviderSignUpScreen extends Component {
                       <Image
                         source={
                           this.state.setImage
-                            ? { uri: this.state.setImage }
+                            ? {uri: this.state.setImage}
                             : globalImagePath.user_dummy
                         }
                         style={{
@@ -533,7 +541,7 @@ export default class ProviderSignUpScreen extends Component {
             </View>
           </ImageBackground>
 
-          <View style={{ backgroundColor: colors.darkShade, flex: 1 }}>
+          <View style={{backgroundColor: colors.darkShade, flex: 1}}>
             <View style={styles.outer_container}>
               <View style={styles.container}>
                 <TextInput
@@ -610,10 +618,11 @@ export default class ProviderSignUpScreen extends Component {
                   level={I18n.t('lbl_password')}
                   error={this.state.passwordError}
                   onChangeText={(password) =>
-                    this.setState({
-                      password: password,
-                      passwordError: validate('password', password, '', true),
-                    },
+                    this.setState(
+                      {
+                        password: password,
+                        passwordError: validate('password', password, '', true),
+                      },
                       () => {
                         if (this.state.confirmPassword != '') {
                           this.setState({
@@ -624,7 +633,8 @@ export default class ProviderSignUpScreen extends Component {
                             ),
                           });
                         }
-                      })
+                      },
+                    )
                   }
                   value={this.state.password}
                 />
@@ -650,8 +660,8 @@ export default class ProviderSignUpScreen extends Component {
                 />
 
                 <View style={{}}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ ...CommonStyles.InputLabelStyle() }}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={{...CommonStyles.InputLabelStyle()}}>
                       {I18n.t('lbl_service_type')}
                     </Text>
                   </View>
@@ -673,7 +683,7 @@ export default class ProviderSignUpScreen extends Component {
                         this.check(1), Keyboard.dismiss();
                       }}
                     />
-                    <View style={{ marginLeft: 10 }}>
+                    <View style={{marginLeft: 10}}>
                       <RadioButton
                         placeholder=""
                         title={I18n.t('lbl_salon')}
@@ -688,7 +698,7 @@ export default class ProviderSignUpScreen extends Component {
                         }}
                       />
                     </View>
-                    <View style={{ marginLeft: 10 }}>
+                    <View style={{marginLeft: 10}}>
                       <RadioButton
                         placeholder=""
                         title={I18n.t('lbl_both')}
@@ -711,8 +721,8 @@ export default class ProviderSignUpScreen extends Component {
                     borderColor: 'rgb(196,170,153)',
                     borderBottomWidth: 0.5,
                   }}>
-                  <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ ...CommonStyles.InputLabelStyle() }}>
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={{...CommonStyles.InputLabelStyle()}}>
                       {I18n.t('lbl_enter_location')}
                     </Text>
                   </View>
@@ -752,7 +762,7 @@ export default class ProviderSignUpScreen extends Component {
                     <Image
                       source={globalImagePath.locationIcon}
                       resizeMode="cover"
-                      style={{ alignSelf: 'center', height: 24, width: 20 }}
+                      style={{alignSelf: 'center', height: 24, width: 20}}
                     />
                   </TouchableOpacity>
                 </View>
@@ -760,7 +770,7 @@ export default class ProviderSignUpScreen extends Component {
                   <ErrorMessage text={this.state.placeNameError} />
                 )}
 
-                <View style={{ marginTop: 20 }}>
+                <View style={{marginTop: 20}}>
                   <TextInput
                     textAlignVertical={'top'}
                     height={100}
@@ -794,8 +804,8 @@ export default class ProviderSignUpScreen extends Component {
                       borderColor: 'rgb(196,170,153)',
                       borderBottomWidth: 0.5,
                     }}>
-                    <View style={{ flexDirection: 'row' }}>
-                      <Text style={{ ...CommonStyles.InputLabelStyle() }}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Text style={{...CommonStyles.InputLabelStyle()}}>
                         {I18n.t('lbl_upload_doc')}
                       </Text>
                     </View>
@@ -823,7 +833,7 @@ export default class ProviderSignUpScreen extends Component {
                       <Image
                         source={globalImagePath.upload}
                         resizeMode="cover"
-                        style={{ alignSelf: 'center' }}
+                        style={{alignSelf: 'center'}}
                       />
                     </TouchableOpacity>
                   </View>
@@ -831,18 +841,24 @@ export default class ProviderSignUpScreen extends Component {
                     <ErrorMessage text={I18n.t('err_document')} />
                   ) : null}
                 </View>
-                <View style={{ flex: 1, marginTop: 10 }}>
+                <View style={{flex: 1, marginTop: 10}}>
                   <FlatList
                     showsVerticalScrollIndicator={false}
                     data={this.state.docArray}
-                    renderItem={({ item, index }) =>
+                    renderItem={({item, index}) =>
                       this.renderDocList(item, index)
                     }
                     keyExtractor={(item, index) => String(index)}
                   />
                 </View>
-                <TouchableOpacity style={{ marginTop: 20, marginBottom: 10 }} onPress={() => { this.props.navigation.navigate('TermAndCondition'); }}>
-                  <Text style={{ fontSize: 14, textDecorationLine: 'underline' }}>{I18n.t('lbl_term_and_condition')}</Text>
+                <TouchableOpacity
+                  style={{marginTop: 20, marginBottom: 10}}
+                  onPress={() => {
+                    this.props.navigation.navigate('TermAndCondition');
+                  }}>
+                  <Text style={{fontSize: 14, textDecorationLine: 'underline'}}>
+                    {I18n.t('lbl_term_and_condition')}
+                  </Text>
                 </TouchableOpacity>
                 <Checkbox
                   fontSize={14}
@@ -850,16 +866,18 @@ export default class ProviderSignUpScreen extends Component {
                   onPress={() => this.check2()}
                   placeholder={I18n.t('lbl_accept_term')}
                 />
-                {this.state.check2Error ? <Lable
-                  style={{ marginLeft: 12, paddingTop: 5 }}
-                  size={11}
-                  color={'red'}
-                  title={this.state.check2Error}
-                /> : null}
+                {this.state.check2Error ? (
+                  <Lable
+                    style={{marginLeft: 12, paddingTop: 5}}
+                    size={11}
+                    color={'red'}
+                    title={this.state.check2Error}
+                  />
+                ) : null}
                 <View
                   ref={(ref) => (this.signupBtn = ref)}
                   animation="slideInUp"
-                  style={{ marginVertical: 30 }}>
+                  style={{marginVertical: 30}}>
                   <Button
                     label={I18n.t('lbl_signUp')}
                     textSize={14}
