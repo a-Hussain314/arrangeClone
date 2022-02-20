@@ -3,8 +3,8 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //***** common url for calling webservices */
-const URL = 'https://35.208.113.133:17345/webservice/user/';
-
+// const URL = 'https://35.208.113.133:17345/webservice/user/';
+const URL = "https://arrange-api.herokuapp.com/webservice/user/"
 //***** common function for get services */
 export const getService = async (urlAction, getParams) => {
   let ServiceUrl = URL + urlAction;
