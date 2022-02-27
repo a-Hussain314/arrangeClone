@@ -77,7 +77,7 @@ export default function Setting({navigation, props}) {
       img: globalImagePath.card,
       navigatepath: 'SaveCard',
     },
-    // { title: I18n.t('lbl_subscription_plan'), img: globalImagePath.settingNotifyIcon, navigatepath: "Subscription" },
+    { title: I18n.t('lbl_subscription_plan'), img: globalImagePath.settingNotifyIcon, navigatepath: "Subscription" },
     {
       title: I18n.t('lbl_my_subscription'),
       img: globalImagePath.settingNotifyIcon,
