@@ -976,10 +976,8 @@ export default function Booking({ route, navigation }) {
                         setLoading(false);
                         showToast(res.data.message);
                         setVisibleCardModal(false);
-
-                        navigation.navigate('PaymentWebView', {
-                            webUrl: res.data.response
-                        })
+                        let webUrl= res.data.response;
+                        navigation.navigate('Bookings')
 
                         setTimeout(() => { isDissbled = false; }, 2000)
                     } else {
@@ -1034,9 +1032,8 @@ export default function Booking({ route, navigation }) {
                         showToast(res.data.message);
                         setVisibleCardModal(false);
                         setTimeout(() => {
-                            navigation.navigate('PaymentWebView', {
-                                webUrl: res.data.response
-                            })
+                            let webUrl= res.data.response;
+                            navigation.navigate('Bookings')
                         }, 100);
 
 
