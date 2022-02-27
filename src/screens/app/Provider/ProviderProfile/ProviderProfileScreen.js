@@ -944,7 +944,7 @@ export default function ProviderProfileScreen({ route, navigation }) {
               isLevelShow={true}
               level={I18n.t('lbl_salon_name')}
               error={salonNameError}
-              editable={false}
+              editable={true}
               inputStyle={{
                 fontFamily: 'NunitoSans-Regular',
                 borderRadius: 5,
