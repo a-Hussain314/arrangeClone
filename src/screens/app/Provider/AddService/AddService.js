@@ -142,11 +142,12 @@ export default function AddService({ navigation, route }) {
         const service_type = serviceId == '' ? I18n.t('lbl_select_service') : ''
         setPriceError(price_error);
         setServiceNameError(serviceNameError);
-        setImageError(image_error)
-        setCountryError(service_type)
+        // setImageError(image_error)
+        // setCountryError(service_type)
         if (
-            price_error || serviceNameError || image_error
-
+            price_error 
+            || serviceNameError 
+            // || image_error
         ) {
         } else {
             setLoading(true);
