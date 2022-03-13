@@ -4,7 +4,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 //***** common url for calling webservices */
 // const URL = 'https://35.208.113.133:17345/webservice/user/';
-const URL = "https://arrange-api.herokuapp.com/webservice/user/"
+// const URL = "https://arrange-api.herokuapp.com/webservice/user/";
+// const URL = "http://App.arrange.sa:8082/webservice/user/";
+const URL = "http://195.201.194.86:8082/webservice/user/"
 //***** common function for get services */
 export const getService = async (urlAction, getParams) => {
   let ServiceUrl = URL + urlAction;

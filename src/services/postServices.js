@@ -3,9 +3,12 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 
 //***** common url for calling webservices */
-// const URL = 'https://35.208.113.133:17345/webservice/user/'; // arrangeApp
+// const URL = 'https://thin-skunk-17.loca.lt/webservice/user/';
 //const URL = 'http://oppa.devtechnosys.tech/public/api/'; // oppa
-const URL = "https://arrange-api.herokuapp.com/webservice/user/"
+// const URL = "https://arrange-api.herokuapp.com/webservice/user/";
+// const URL = 'http://app.arrange.sa:8082/webservice/user/';
+const URL = "http://195.201.194.86:8082/webservice/user/"
+
 //***** common function for post services */
 export const postService = async (urlAction, params) => {
   let ServiceUrl = URL + urlAction;
@@ -27,7 +30,7 @@ export const postService = async (urlAction, params) => {
     Authorization: `Bearer ${token}`,
   };
   //console.log("ServiceUrl ==>", headers);
-  console.log("🚀 ~ file: postServices.js ~ line 38 ~ ServiceUrl", ServiceUrl)
+  console.log('🚀 ~ file: postServices.js ~ line 38 ~ ServiceUrl', ServiceUrl);
   return new Promise(function (resolve, reject) {
     axios({
       method: 'post',
