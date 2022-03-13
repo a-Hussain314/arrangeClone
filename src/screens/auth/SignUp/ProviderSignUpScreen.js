@@ -116,8 +116,8 @@ export default class ProviderSignUpScreen extends Component {
     const emailError = validate('email', this.state.email);
     const passwordError = validate('password', this.state.password);
     const check2Error = validate('check2', this.state.checked2);
-    // const docFileError =
-    //   this.state.docArray.length == 0 ? I18n.t('err_document') : '';
+    const docFileError =
+      this.state.docArray.length == 0 ? I18n.t('err_document') : '';
     const placeName_errr =
       this.state.placeName == '' ? I18n.t('err_select_location') : '';
     const confirmPasswordError = validate(
@@ -133,7 +133,7 @@ export default class ProviderSignUpScreen extends Component {
       salonNameError: salonNameError,
       emailError: emailError,
       passwordError: passwordError,
-      // docFileError: docFileError,
+      docFileError: docFileError,
       confirmPasswordError: confirmPasswordError,
       placeNameError: placeName_errr,
       check2Error: check2Error,
@@ -147,7 +147,7 @@ export default class ProviderSignUpScreen extends Component {
       passwordError ||
       descriptionError ||
       placeName_errr ||
-      // docFileError ||
+      docFileError ||
       check2Error
     ) {
       // this.signupBtn.shake();
@@ -178,18 +178,17 @@ export default class ProviderSignUpScreen extends Component {
       body.append('role', 3);
       body.append('email', this.state.email.toLowerCase());
       body.append('description', this.state.description);
-      // body.append('pdf', this.state.docUri);
-      // if (this.state.docArray.length != 0) {
-      //   this.state.docArray.forEach((item, i) => {
+      body.append('pdf', this.state.docUri);
+      if (this.state.docArray.length != 0) {
+        this.state.docArray.forEach((item, i) => {
+          body.append('pdf', {
+            uri: item.uri,
+            type: item.type,
+            name: 'pdf' + i + '.pdf',
+          });
+        });
+      }
 
-      //     body.append('pdf', {
-      //       uri: item.uri,
-      //       type: item.type,
-      //       name: 'pdf' + i + '.pdf',
-      //     });
-      //   });
-      // }
-      // e
       body.append('salon_name', this.state.salonName);
       body.append('servicetype', this.state.serviceType);
       body.append('phoneno', this.state.phone);
@@ -205,27 +204,22 @@ export default class ProviderSignUpScreen extends Component {
 
       postService('register', body)
         .then((res) => {
-          // Object.keys(res).forEach((key) => {
-          //   console.log(
-          //     '🚀 ~ file: ProviderSignUpScreen.js ~ ProviderSignUpScreen ~ res.keys ~',
-          //     key,
-          //     res[key],
-          //   );
-          // });
-
           if (res.data.status === 1) {
             this.setState({
               loading: false,
             });
-            setTimeout(() => {
-              showToast(res.data.message);
-              this.props.navigation.navigate('VerifyOtp', {
-                screenName: 'register',
-                email: user_email,
-                password: user_password,
-                phoneNumber : this.state.phone
-              });
-            }, 100);
+            showToast(res.data.message);
+            console.log('nav data', {
+              email: user_email,
+              password: user_password,
+              phoneNumber: this.state.phone,
+            });
+            this.props.navigation.navigate('VerifyOtp', {
+              screenName: 'register',
+              email: user_email,
+              password: user_password,
+              phoneNumber: this.state.phone,
+            });
 
             this.setState({
               placeName: '',
