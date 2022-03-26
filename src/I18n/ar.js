@@ -61,6 +61,8 @@ export default {
   // select otp screen screen
   lbl_varification: 'التحقق',
   lbl_otp_subtitle: 'أدخل رمز التحقق الذي أرسلناه لك للتو على هاتفك',
+  lbl_otp_subtitle_email: 'أدخل رمز التحقق الذي أرسلناه لك للتو على بريدك الالكترونى',
+
   lbl_verify: 'تحقق',
   lbl_dont_receive_code: 'لم يصلك الرمز؟',
   lbl_resend: 'إعادة إرسال',

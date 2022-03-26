@@ -59,8 +59,8 @@ export default {
 
   // select otp screen screen
   lbl_varification: 'Verification',
-  lbl_otp_subtitle:
-    'Enter the verification code we just sent you on your phone',
+  lbl_otp_subtitle: 'Enter the verification code we just sent you on your phone',
+  lbl_otp_subtitle_email: 'Enter the verification code we just sent you on your email',
   lbl_verify: 'Verify',
   lbl_dont_receive_code: `Didn${"'"}t receive the code?`,
   lbl_resend: 'Resend',
