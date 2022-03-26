@@ -142,9 +142,13 @@ export default function AddService({navigation, route}) {
     const service_type = serviceId == '' ? I18n.t('lbl_select_service') : '';
     setPriceError(price_error);
     setServiceNameError(serviceNameError);
-    setImageError(image_error);
+    // setImageError(image_error);
     setCountryError(service_type);
-    if (price_error || serviceNameError || image_error) {
+    if (
+      price_error
+       ||serviceNameError
+      //  ||image_error
+       ) {
     } else {
       setLoading(true);
       let body = new FormData();
@@ -245,7 +249,7 @@ export default function AddService({navigation, route}) {
           setImage(res.uri);
           setImageName(res.fileName);
           setIsImageUpdate(true);
-          setImageError(validate('image', res.uri));
+          // setImageError(validate('image', res.uri));
         }
       },
     );
