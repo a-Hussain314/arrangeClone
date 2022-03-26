@@ -219,7 +219,10 @@ export default function OtpScreen({ route, navigation }) {
               {I18n.t('lbl_otp_subtitle')}
             </Text>
             <View style={{ flexDirection: 'row', }}>
-              <Text style={{ ...CommonStyles.WhiteTitleTextStyle(12) }}>{I18n.t('lbl_phone_number') + ' : '}</Text>
+              <Text style={{ ...CommonStyles.WhiteTitleTextStyle(12) }}>
+              {route.params.type ==="saloon" ?
+                I18n.t('lbl_email') + ' : ' : I18n.t('lbl_phone_number') + ' : '}
+                </Text>
               <Text
                 style={{
                   ...CommonStyles.WhiteTitleTextStyle(12),
@@ -228,7 +231,7 @@ export default function OtpScreen({ route, navigation }) {
                   paddingRight: 10,
                   textDecorationLine: 'underline'
                 }}>
-                {route.params.phoneNumber}
+                {route.params.type ==="saloon" ? route.params.email :route.params.phoneNumber}
               </Text>
             </View>
           </View>

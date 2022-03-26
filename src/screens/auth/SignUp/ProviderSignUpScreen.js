@@ -215,6 +215,7 @@ export default class ProviderSignUpScreen extends Component {
               phoneNumber: this.state.phone,
             });
             this.props.navigation.navigate('VerifyOtp', {
+              type:"saloon",
               screenName: 'register',
               email: user_email,
               password: user_password,

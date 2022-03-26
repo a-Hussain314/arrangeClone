@@ -129,6 +129,7 @@ export default class Login extends Component {
             setTimeout(() => {
               showToast(res.data.message);
               this.props.navigation.navigate('VerifyOtp', {
+                type:"user",
                 screenName: 'register',
                 email: user_email,
                 password: user_password,
