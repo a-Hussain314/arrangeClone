@@ -94,6 +94,7 @@ export default function CustomerLoginScreen({ navigation }) {
           await AsyncStorage.setItem('user', JSON.stringify(res.data));
           setLoading(false);
           navigation.navigate('VerifyOtp', {
+            type:"user",
             screenName: 'login',
             phoneNumber:phone,
           });

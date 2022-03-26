@@ -114,6 +114,7 @@ export default function LoginScreen({navigation}) {
           ) {
             //  console.log("res.data else if =>");
             navigation.navigate('VerifyOtp', {
+              type:"saloon",
               screenName: 'login',
               email: email,
               password: password,
