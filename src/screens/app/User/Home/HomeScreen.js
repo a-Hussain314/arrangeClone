@@ -21,7 +21,7 @@ import font from '../../../../Theme/font';
 import I18n from '../../../../I18n';
 import Loader from '../../../../components/Loader';
 import { getService } from '../../../../services/getServices';
-import { USER_HOME_BANNER_URL, USER_HOME_SERVICE_URL, USER_HOME_SALON_URL } from '../../../../utils/constants';
+import { USER_HOME_BANNER_URL, USER_HOME_SERVICE_URL, USER_HOME_SALON_URL, SALON_OFFERS } from '../../../../utils/constants';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { AuthContext } from '../../../../contexts/AuthContext';
 import { useAuth } from '../../../../hooks/useAuth';
@@ -328,6 +328,7 @@ export default function HomeScreen({ navigation, route }) {
 
       <Content>
         <View style={style.carouselContainer}>
+          {console.log("🚀🚀🚀",bannerData)}
           <Carousel
             data={bannerData}
             renderItem={item => renderItem(item)}
