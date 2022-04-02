@@ -162,7 +162,8 @@ export default function OtpScreen({route, navigation}) {
     setLoading(true);
 
     const postData = {
-      email: route.params.email,
+      ...(route.params.type === 'saloon' && { email: route.params.email }),
+      ...(route.params.type !== 'saloon' && { phoneNumber: route.params.phoneNumber }),
     };
 
     // let body = new FormData();
@@ -178,7 +179,7 @@ export default function OtpScreen({route, navigation}) {
         } else {
           setLoading(false);
           var message = '';
-          res.data.errors.map((val) => {
+          res?.data?.errors?.map((val) => {
             message += Object.values(val) + ' ';
           });
           setTimeout(function () {
@@ -233,8 +234,8 @@ export default function OtpScreen({route, navigation}) {
                 paddingRight: 10,
               }}>
               {route.params.type === 'saloon'
-                ? I18n.t('lbl_otp_subtitle')
-                : I18n.t("lbl_otp_subtitle_email")}
+                ? I18n.t('lbl_otp_subtitle_email')
+                : I18n.t('lbl_otp_subtitle')}
             </Text>
             <View style={{flexDirection: 'row'}}>
               <Text style={{...CommonStyles.WhiteTitleTextStyle(12)}}>
