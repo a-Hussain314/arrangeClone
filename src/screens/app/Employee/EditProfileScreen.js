@@ -95,7 +95,7 @@ export default function EditProfileScreen({navigation}) {
         } else {
           setLoading(false);
           var message = '';
-          res.data.errors.map((val) => {
+          res?.data?.errors?.map((val) => {
             message += Object.values(val) + ' ';
           });
           setTimeout(function () {
@@ -216,7 +216,7 @@ export default function EditProfileScreen({navigation}) {
           } else {
             setLoading(false);
             var message = '';
-            res.data.errors.map((val) => {
+            res?.data?.errors?.map((val) => {
               message += Object.values(val) + ' ';
             });
             setTimeout(function () {

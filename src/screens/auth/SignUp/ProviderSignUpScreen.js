@@ -241,8 +241,8 @@ export default class ProviderSignUpScreen extends Component {
               loading: false,
             });
             var message = '';
-            if (res.data.errors != '') {
-              res.data.errors.map((val) => {
+            if (res?.data?.errors != '') {
+              res?.data?.errors?.map((val) => {
                 message += Object.values(val) + ' ';
               });
             }

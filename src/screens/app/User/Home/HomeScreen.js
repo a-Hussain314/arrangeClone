@@ -69,7 +69,7 @@ export default function HomeScreen({ navigation, route }) {
         } else {
 
           var message = '';
-          res.data.errors.map((val) => {
+          res?.data?.errors?.map((val) => {
             message += Object.values(val) + ' '
           })
           setTimeout(function () {
